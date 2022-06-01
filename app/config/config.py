@@ -31,14 +31,14 @@ class Config:
     # ratelimit service
     ratelimit = {
         # change to http://ratelimit.service.consul:8080/json for prod use
-        "ratelimit_url": "testing_ratelimit",
+        "ratelimit_url": "testing_ratelimit_1",
         # please create your own domain beforehand
         # at https://alki.i.wish.com or https://alki-stage.i.wish.com
-        "ratelimit_domain": "test_ratelimit_domain",
+        "ratelimit_domain": "test_ratelimit_domain_1",
     }
 
     # sentry
-    sentry_dsn = "testing_sentry"
+    sentry_dsn = "testing_sentry_1"
 
     # jaeger tracing (deprecated, please use opentelemetry instead)
     # tracing = JaegerConfig(

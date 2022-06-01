@@ -10,7 +10,7 @@ def load_options_from_cli() -> None:
     return app config and celery config.
     """
     parser = ArgumentParser()
-    print("parser")
+    print("parser_1")
     parser.add_argument(
         "-l", "--log_level", type=str, default=SUPPRESS, help="log level"
     )
