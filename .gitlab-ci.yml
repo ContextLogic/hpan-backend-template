@@ -1,0 +1,28 @@
+variables:
+  ITA_TEMPLATE: python-backend-worker-template
+  ITA_ADD_BUILD_ARGS: "ITA_JOB_TOKEN" # Space delimited list of variables passed as arguments during Docker build
+  ITA_CACHED_BUILD: "true" # Flag for telling image-builder to perform caching
+
+stages:
+  - pre-test
+  - build
+  - test
+  - tag
+  - release
+
+include:
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-build-tag-and-deploy/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-python-black/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-python-lint/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-python-mypy/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-pytest/default.yml"
