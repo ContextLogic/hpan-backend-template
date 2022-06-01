@@ -1,0 +1,11 @@
+worker:
+  name: python-backend-worker-template
+  use_vpce: false
+  concurrency: 8
+  region: us-west-1
+  ratelimit_host: ratelimit-dev.service.consul:8080
+server:
+  port: 8080
+env: local
+sentry_dsn: https://ae0f12aa12d148eca4e1372c54e01cfa@sentry.infra.wish.com/226
+loglevel: info
