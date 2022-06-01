@@ -31,14 +31,14 @@ class Config:
     # ratelimit service
     ratelimit = {
         # change to http://ratelimit.service.consul:8080/json for prod use
-        "ratelimit_url": "http://ratelimit-stage.service.consul:8080/json",
+        "ratelimit_url": "testing_ratelimit",
         # please create your own domain beforehand
         # at https://alki.i.wish.com or https://alki-stage.i.wish.com
-        "ratelimit_domain": "python-backend-worker-template",
+        "ratelimit_domain": "test_ratelimit_domain",
     }
 
     # sentry
-    sentry_dsn = "https://ae0f12aa12d148eca4e1372c54e01cfa@sentry.infra.wish.com/226"
+    sentry_dsn = "testing_sentry"
 
     # jaeger tracing (deprecated, please use opentelemetry instead)
     # tracing = JaegerConfig(
