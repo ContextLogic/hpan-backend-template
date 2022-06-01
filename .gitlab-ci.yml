@@ -1,0 +1,27 @@
+variables:
+  ITA_TEMPLATE: python-backend-worker-template # DO NOT EDIT, CHANGE OR ALTER
+  ITA_ADD_BUILD_ARGS: "ITA_JOB_TOKEN"
+
+stages:
+  - pre-test
+  - build
+  - test
+  - tag
+  - release
+
+include:
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-build-tag-and-deploy/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-python-black/default.yml"
+  - project: "contextlogic/includes"
+    ref: master
+    file: "/templates/job-python-lint/default.yml"
+  - project: 'contextlogic/includes'
+    ref: master
+    file: '/templates/job-python-mypy/default.yml'
+  - project: 'contextlogic/includes'
+    ref: master
+    file: '/templates/job-pytest/default.yml'

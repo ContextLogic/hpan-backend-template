@@ -1,0 +1,23 @@
+version: '3'
+services:
+  server:
+    container_name: python-backend-worker-server
+    build: 
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${HOME}/.aws/credentials:/home/worker/.aws/credentials:ro
+      - ./:/usr/src/python-backend-worker-template
+    environment:
+      - "PYTHONDONTWRITEBYTECODE=1"
+    stdin_open: true
+    tty: true
+  fluentd:
+    container_name: fluentd
+    build: fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    ports:
+      - "8889:8889"
+      - "8889:8889/udp"
