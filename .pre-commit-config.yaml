@@ -1,0 +1,23 @@
+fail_fast: true
+repos:
+  - repo: local
+    hooks:
+      - id: system
+        name: Black
+        entry: poetry run black .
+        pass_filenames: false
+        language: system
+  - repo: local
+    hooks:
+      - id: system
+        name: MyPy
+        entry: poetry run mypy app/ --ignore-missing-imports --disallow-untyped-defs --disallow-incomplete-defs --warn-unused-ignores --pretty --show-error-codes
+        pass_filenames: false
+        language: system
+  - repo: local
+    hooks:
+      - id: system
+        name: Pylint
+        entry: poetry run pylint app/ tests --rcfile=.pylintrc --fail-under=10
+        pass_filenames: false
+        language: system
