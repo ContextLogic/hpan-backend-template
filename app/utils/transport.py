@@ -1,0 +1,41 @@
+"""
+customized transport class with ratelimiter feature,
+celery worker should use this transport if queue-level ratelimiting is needed.
+"""
+
+from abc import ABC
+
+from kombu.transport.SQS import Transport, Channel
+from vine import promise
+
+from app.config.queues import QUEUES
+from app.utils.ratelimit import RatelimitClient
+
+
+class RatelimitChannel(ABC, Channel):
+    """
+    A ratelimit Channel inherited from kombu SQS Channel class, modified the _schedule_queue function to
+    add ratelimiting feature when polling from queues.
+    """
+
+    def _schedule_queue(self, queue: str) -> None:
+        if queue in self._active_queues:
+            if self.qos.can_consume() and not RatelimitClient.ratelimit(
+                QUEUES.ratelimit_name(queue)
+            ):
+                self._get_bulk_async(
+                    queue,
+                    callback=promise(self._loop1, (queue,)),
+                )
+            else:
+                self._loop1(queue)
+
+
+# pylint: disable=invalid-name
+class ratelimittransport(ABC, Transport):
+    """
+    A ratelimit transport class inherited from kombu SQS Transport class, overwrite the Channel
+    to use the RatelimitChannel
+    """
+
+    Channel = RatelimitChannel
