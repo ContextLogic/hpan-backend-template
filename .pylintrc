@@ -1,0 +1,26 @@
+[MESSAGES CONTROL]
+
+enable=all
+disable=no-self-use,
+        import-error,
+        duplicate-code,
+        locally-disabled,
+        suppressed-message,
+        too-few-public-methods,
+        missing-class-docstring,
+        missing-function-docstring,
+        no-else-return,
+        too-many-public-methods,
+        unused-argument,
+        too-many-instance-attributes,
+        global-statement,
+        broad-except
+
+[DESIGN]
+max-args=8
+
+[FORMAT]
+max-line-length=120
+
+[BASIC]
+good-names=pk, db, gl, dt, ip, sk, vault_client
